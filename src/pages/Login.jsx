@@ -1,5 +1,4 @@
 import React from "react";
-import note from "../assets/image/cara-no-note.jpg";
 
 class Login extends React.Component {
   state = {

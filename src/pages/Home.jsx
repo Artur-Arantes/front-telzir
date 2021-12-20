@@ -26,7 +26,7 @@ class Home extends React.Component {
         <div class="row justify-content-center align-middle principal-text">
           <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4 align-self-center">
               <div class="typewriter text-primary">
-                <h1>Telzir Empresa de Telefonia.</h1>
+                <h1>Telzir Telefonia.</h1>
               </div>
           </div>
         </div>

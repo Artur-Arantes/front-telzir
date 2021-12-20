@@ -10,19 +10,15 @@ class Navbar extends React.Component {
 
   render() {
     const carStyle = {
-      padding: "4px 8px",
-      display: "inline-block",
-      background: "red",
-      color: "#fff",
-      fontSize: "10px",
-      borderRadius: "50%",
-      position: "absolute",
+      position: "fixed",
+      width: "100vw",
       top: "0",
       right: "0",
+      zIndex:"999"
     };
 
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-4">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-4" style={carStyle}>
         <div className="container">
           <Link className="navbar-brand fw-bold" to="/">
             TELZIR
@@ -42,14 +38,6 @@ class Navbar extends React.Component {
             <div className="navbar-nav ms-auto">
               <Link className="nav-link active me-3" to="/product">
                 Planos
-              </Link>
-              <Link
-                style={{ position: "relative" }}
-                className="nav-link active me-3"
-                to="/product"
-              >
-                <FontAwesomeIcon className="me-3" icon={faCartPlus} />
-                <span style={carStyle}>{this.state.quantity}</span>
               </Link>
               <Link
                 className="nav-link btn btn-outline-info px-4 me-3"
