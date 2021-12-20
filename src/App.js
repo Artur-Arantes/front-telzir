@@ -17,6 +17,7 @@ function App() {
           <Route path="/login" element={<Login title={title} />} />
           <Route path="/register" element={<Register title={title} />} />
           <Route path="/product" element={<Planos title= {title}/>}></Route>
+          <Route path="/tabela" element={<Tabela title={title}/>}></Route>
         </Routes>
       </div>
     </Router>

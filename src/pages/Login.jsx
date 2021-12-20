@@ -12,9 +12,9 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div class="position-absolute top-50 start-50 translate-middle">
+      <div class="position-absolute top-50 start-50 translate-middle ">
         <div class="text-center">
-            <h1> LOGIN</h1>
+          <h1> login</h1>
           <form>
             <div class="form-row align-items-center">
               <div class="col-11">
