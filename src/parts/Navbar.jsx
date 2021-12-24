@@ -36,20 +36,8 @@ class Navbar extends React.Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav ms-auto">
-              <Link className="nav-link active me-3" to="/product">
+              <Link className="nav-link active me-3" to="/plano/">
                 Planos
-              </Link>
-              <Link
-                className="nav-link btn btn-outline-info px-4 me-3"
-                to="/login"
-              >
-                Login
-              </Link>
-              <Link
-                className="nav-link btn btn-info px-4 me-3 text-white"
-                to="/register"
-              >
-                Register
               </Link>
             </div>
           </div>

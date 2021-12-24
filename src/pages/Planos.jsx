@@ -2,21 +2,38 @@ import React from "react";
 import "../assets/css/planos.css";
 
 class Planos extends React.Component {
+  isObject(obj) {
+    return obj !== undefined && obj !== null && obj.constructor == Object;
+  }
+
   handleSubmit(e) {
-    const data = {
-      tempo: this.tempo,
-      dddOrigem: this.dddOrigem,
-      dddDestino: this.dddDestino,
-      id_plan: this.id_plan,
-    };
+    e.preventDefault();
+    const form = e.currentTarget;
+    let args =
+      "?tempo=" +
+      form.elements["tempo"].value +
+      "&" +
+      "dddOrigem=" +
+      form.elements["dddOrigem"].value +
+      "&" +
+      "dddDestino=" +
+      form.elements["dddDestino"].value +
+      "&" +
+      "id_plan=" +
+      form.elements["id_plan"].value;
     const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
-      body: data,
     };
-    fetch(process.env.REACT_APP_URL_PROD + "plano/busca", requestOptions).then(
-      (response) => response.json()
-    );
+    fetch(process.env.REACT_APP_URL_PROD + "plano/busca" + args, requestOptions)
+      .then((response) => {if (response.ok) {
+        return response.json();
+      } else {
+        response.text().then((text)=>this.setState({erro:text}));
+      }})
+      .then((response) => {
+        this.setState({ resultado: response });
+      });
   }
 
   buscaPlanos() {
@@ -27,7 +44,20 @@ class Planos extends React.Component {
       });
   }
   componentDidMount() {
+    this.handleSubmit=this.handleSubmit.bind(this);
     document.title = this.state.title;
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: "planos",
+      plano: [],
+      resultado: null,
+      erro: null,
+    };
+    this.buscaPlanos();
+   
   }
 
   componentWillUnmount() {}
@@ -40,36 +70,35 @@ class Planos extends React.Component {
       ));
     }
     let tabela = "";
-    if (this.state.resultado) {
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row"></th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </table>;
+    if (!!this.state.resultado) {
+      tabela = (
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Tipo de Plano</th>
+              <th scope="col">Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Com Plano</td>
+              <td>{this.state.resultado.comFaleMais}</td>
+            </tr>
+            <tr>
+              <td>Sem Plano</td>
+              <td>{this.state.resultado.taxaNormalDaLigacao}</td>
+            </tr>
+          </tbody>
+        </table>
+      );
+    }
+    let erro = "";
+    if (!!this.state.erro) {
+      erro = (
+        <div class="alert alert-danger" role="alert">
+          {this.state.erro}
+        </div>
+      );
     }
     return (
       <div className="container py-4 mt-5 ">
@@ -120,14 +149,17 @@ class Planos extends React.Component {
                   class="form-select"
                   id="id_plan"
                   aria-label="Default select example"
+                  onChange={(e) => (this.id_plan = e.target.value)}
                 >
                   {optionTemplate}
                 </select>
               </div>
-              <button type="submit" className="btn btn-primary">
+              <button id="btnCalcular" type="submit" className="btn btn-primary">
                 Calcular
               </button>
             </form>
+            {tabela}
+            {erro}
           </div>
         </div>
       </div>

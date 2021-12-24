@@ -14,7 +14,7 @@ function App() {
         <div class="content">
           <Routes>
             <Route path="/" element={<Home title={title} />} />
-            <Route path="/planos" element={<Planos title= {title}/>}></Route>
+            <Route path="/plano" element={<Planos title= {title}/>}></Route>
           </Routes>
         </div>
       </div>
