@@ -4,8 +4,6 @@
 
 #Foi feito o deploy atraves da plataforma heroku#
 
-##Esse App foi construido com o proposito de cumprir um teste da LolDesign#
-
 
 ##Link::https://telzir-front-teste.herokuapp.com/plano/ #
 
